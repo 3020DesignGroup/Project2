@@ -85,12 +85,7 @@ bool getInput(Graph& graph)
 
 void randBuildGraph(Graph& graph, int size)
 {
-    Vertex vertex;
-    for (int i = 0; i < size; i++)
-    {
-        vertex.addEdge(i);
-        graph.addVertex(vertex);
-    }
+
 }
 
 void fileBuildGraph(Graph& graph, ifstream& infile)
