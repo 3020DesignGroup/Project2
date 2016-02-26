@@ -16,6 +16,7 @@ class Vertex
 public:
 
     Vertex();
+    Vertex(string name);
 
     //Returns the vector of Edges in this Vertex
     vector<int> getEdges() const;
@@ -62,7 +63,12 @@ private:
 //Vertex Function Definitions
 Vertex::Vertex()
 {
+    _name = "Default Name";
+}
 
+Vertex::Vertex(string name)
+{
+    _name = name;
 }
 
 vector<int> Vertex::getEdges() const
@@ -77,14 +83,14 @@ string Vertex::getName() const
 
 void Vertex::addEdge(int vertex)
 {
-       
+    if(vertex >= 0)
+    _edges.push_back(vertex);
 }
 
 //Graph Function Definitions
 
 Graph::Graph()
 {
-
 }
 
 Graph::~Graph()
@@ -104,7 +110,7 @@ vector<Vertex> Graph::getVertices() const
 
 void Graph::addVertex(Vertex vertex)
 {
-
+    _vertices.push_back(vertex);
 }
 void Graph::addEdge(Vertex vertex1, Vertex vertex2)
 {
@@ -112,5 +118,6 @@ void Graph::addEdge(Vertex vertex1, Vertex vertex2)
 }
 void Graph::addEdge(int index1, int index2)
 {
-
+    Vertex vertex = _vertices[index1];
+    vertex.addEdge(index1);
 }

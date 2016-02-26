@@ -54,6 +54,7 @@ bool getInput(Graph& graph)
         //prompt for size
         cout << "please enter desired size: ";
         cin >> size;
+
         randBuildGraph(graph, size);
         return true;
     }
@@ -72,6 +73,7 @@ bool getInput(Graph& graph)
             cerr << "File not found!" << endl << endl;
             return false;
         }
+
         fileBuildGraph(graph, infile);
         return true;
     }
