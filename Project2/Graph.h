@@ -60,6 +60,7 @@ private:
     //_vertices vector. If it does not exist -1 is returned. O(n)
     //Uses the vertex name and edges to determine equality
     int findVertex(Vertex vertex);
+    int getLongestPath(int next);
 };
 
 //Vertex Function Definitions
@@ -129,6 +130,12 @@ void Graph::addEdge(int index1, int index2)
 }
 
 //Private Helper Functions
+
+int Graph::getLongestPath(int next)
+{
+    
+}
+
 int Graph::findVertex(Vertex vertex)
 {
     for(int i = 0; i < _vertices.size(); i++)
