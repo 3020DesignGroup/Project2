@@ -11,6 +11,10 @@
 #include"winTimer.h"
 #include<iostream>
 #include<fstream>
+#include<string>
+#include <cstdlib>
+#include <cstdio>
+#include <sstream>
 
 using namespace std;
 
@@ -18,6 +22,7 @@ using namespace std;
 bool getInput(Graph& graph);
 void randBuildGraph(Graph& graph, int size);
 void fileBuildGraph(Graph& graph, ifstream& infile);
+string intToString(int intConvert);
 
 int main()
 {
@@ -87,10 +92,37 @@ bool getInput(Graph& graph)
 
 void randBuildGraph(Graph& graph, int size)
 {
-
+    int edgeIndex = 0;
+    for(int i = 0; i < size - 1; i++)
+    {
+        Vertex vertex(intToString(i));
+        int numVertices = randReal(0, size - edgeIndex);
+        for(int k = 0; k < numVertices; k++)
+        {
+            vertex.addEdge(edgeIndex);
+            edgeIndex++;
+        }
+        graph.addVertex(vertex);
+    }
+    
+    Vertex vertex(intToString(size-1));
+    while(edgeIndex < size-1)
+    {
+        vertex.addEdge(edgeIndex);
+        edgeIndex++;
+    }
+    graph.addVertex(vertex);
+   
 }
 
 void fileBuildGraph(Graph& graph, ifstream& infile)
 {
     
+}
+
+string intToString(int intConvert)
+{
+		std::ostringstream cstr;  //create the stream
+		cstr << intConvert;  //put integer into the stream
+		return cstr.str();  //put out the string
 }
