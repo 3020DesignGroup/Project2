@@ -40,8 +40,6 @@ class Graph
 {
 public:
     Graph();
-    //added a destructor to handle dynamically constructed Vertices
-    ~Graph();
 
     int getLongestPath() const;
     vector<Vertex> getVertices() const;
@@ -58,6 +56,10 @@ public:
 
 private:
     vector<Vertex> _vertices;
+    //returns the index of the vertex passed if it exists in the 
+    //_vertices vector. If it does not exist -1 is returned. O(n)
+    //Uses the vertex name and edges to determine equality
+    int findVertex(Vertex vertex);
 };
 
 //Vertex Function Definitions
@@ -73,12 +75,12 @@ Vertex::Vertex(string name)
 
 vector<int> Vertex::getEdges() const
 {
-        return _edges;
+    return _edges;
 }
 
 string Vertex::getName() const
 {
-        return _name;
+    return _name;
 }
 
 void Vertex::addEdge(int vertex)
@@ -91,15 +93,12 @@ void Vertex::addEdge(int vertex)
 
 Graph::Graph()
 {
-}
-
-Graph::~Graph()
-{
-
+    //nothing needs to be done
 }
 
 int Graph::getLongestPath() const
 {
+    //STUB
     return 0;
 }
 
@@ -114,10 +113,46 @@ void Graph::addVertex(Vertex vertex)
 }
 void Graph::addEdge(Vertex vertex1, Vertex vertex2)
 {
-
+    int index = findVertex(vertex2);
+    if(index > -1)
+    {
+         vertex1.addEdge(index);
+    }
 }
 void Graph::addEdge(int index1, int index2)
 {
-    Vertex vertex = _vertices[index1];
-    vertex.addEdge(index1);
+    if(index1 < _vertices.size() && index1 >= 0)
+    {
+        Vertex vertex = _vertices[index1];
+        vertex.addEdge(index1); 
+    }
+}
+
+//Private Helper Functions
+int Graph::findVertex(Vertex vertex)
+{
+    for(int i = 0; i < _vertices.size(); i++)
+    {
+        //Using names and edges of vertices to determine equality
+        if(_vertices[i].getName() == vertex.getName())
+        {
+           Vector<int> edges1 =  _vertices[i].getEdges();
+           Vector<int> edges2 = vertex.getEdges();
+           bool found == false;
+           int i = 0;
+           while(looking && i < edges2.size())
+           {
+                if(edges1[i] != edges2[i])
+                {
+                    looking == false;
+                }
+                i++;
+           }
+           if(looking == true)
+           {
+               return i;
+           }
+        }
+    }
+    return -1;
 }
