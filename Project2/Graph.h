@@ -101,7 +101,9 @@ int Graph::getLongestPath() const
 {
     int max = 0;
     int height = 0;
-
+    
+    //This loop is here mainly to ensure all vertices get checked
+    //without it, some vertices may/will go unchecked and the longest path will not be accurate
     for (int i = 0; i < _vertices.size(); i++)
     {
         int height = getLongestPath(i);

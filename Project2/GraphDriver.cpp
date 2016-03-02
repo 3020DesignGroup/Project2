@@ -20,7 +20,10 @@ using namespace std;
 
 
 bool getInput(Graph& graph);
+//builds a random acyclic undirected unweighted graph based upon the size inputted
+//
 void randBuildGraph(Graph& graph, int size);
+
 //Warning: filebuildgraph does not check input for cycles nor does it prevent them.
 //It is the file creator's job to make sure the graph is acyclic. If the graph has
 //a cycle the program will crash
@@ -103,6 +106,10 @@ void randBuildGraph(Graph& graph, int size)
 	for (int i = 0; i < size; i++)
 	{
 		Vertex vertex(intToString(i));
+        //the randint as a variable in randInt exists to help spread out 
+        //the edges even more. Without it, for large sizes, the function
+        //heavily favored longest path lengths of 3
+        //Now the path lenghts have a much wider range and are much more unpreditcable
 		int numVertices = randInt(0, (size/(randInt(1, size))) );
 		for (int k = 0; k < numVertices; k++)
 		{
