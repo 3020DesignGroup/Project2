@@ -49,7 +49,7 @@ int main()
 	cout << "Longest Path in Tree is: " << longestPath << "\nand was found in " << timer() << " seconds" << endl;
 
 	//Debug function
-	printGraph(graph);
+	//printGraph(graph);
 	return 0;
 }
 
@@ -106,11 +106,7 @@ void randBuildGraph(Graph& graph, int size)
 	for (int i = 0; i < size; i++)
 	{
 		Vertex vertex(intToString(i));
-        //the randint as a variable in randInt exists to help spread out 
-        //the edges even more. Without it, for large sizes, the function
-        //heavily favored longest path lengths of 3
-        //Now the path lenghts have a much wider range and are much more unpreditcable
-		int numVertices = randInt(0, (size/(randInt(1, size))) );
+		int numVertices = randInt(1, 10);
 		for (int k = 0; k < numVertices; k++)
 		{
 			if (edgeIndex > i && edgeIndex < size)
