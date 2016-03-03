@@ -41,7 +41,7 @@ class Graph
 public:
 	Graph();
 
-	int getLongestPath(Graph graph) const;
+	int getLongestPath() const;
 	vector<Vertex> getVertices() const;
 
 	void addVertex(Vertex vertex);
@@ -60,7 +60,7 @@ private:
 	//_vertices vector. If it does not exist -1 is returned. O(n)
 	//Uses the vertex name and edges to determine equality
 	int findVertex(Vertex vertex);
-	int getLongestPath(int next);
+	int getLongestPath(int next) const;
 };
 
 //Vertex Function Definitions
@@ -97,10 +97,10 @@ Graph::Graph()
 	//nothing needs to be done
 }
 
-int Graph::getLongestPath(Graph graph) const
-{
-	int answer = graph.getLongestPath(0);
-	return answer;
+int Graph::getLongestPath() const
+{	
+		int height = getLongestPath(0);		
+		return height;
 }
 
 vector<Vertex> Graph::getVertices() const
@@ -131,29 +131,29 @@ void Graph::addEdge(int index1, int index2)
 
 //Private Helper Functions
 
-int Graph::getLongestPath(int next)
+int Graph::getLongestPath(int next) const
 {
-	int height1 = 0;
 	int max = 0;
 	vector<int> edges = _vertices[next].getEdges();
-	if (edges.empty()) 
+	if (edges.empty())
 	{
 		return 1;
 	}
 	else
 	{
-		
+
 		for (int x = 0; x < edges.size(); x++)
 		{
-			height1 = getLongestPath(edges[x]);
-			if (height1 > max)
+			int height = getLongestPath(edges[x]);
+			if (height > max)
 			{
-				max = height1;
+				max = height;
 			}
 		}
-		return (max + 1);
+
 	}
-	//return 0;
+	return (max + 1);
+
 }
 
 int Graph::findVertex(Vertex vertex)

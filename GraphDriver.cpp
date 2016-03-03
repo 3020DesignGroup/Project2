@@ -20,31 +20,40 @@ using namespace std;
 
 
 bool getInput(Graph& graph);
+//builds a random acyclic undirected unweighted graph based upon the size inputted
+//
 void randBuildGraph(Graph& graph, int size);
+
+//Warning: filebuildgraph does not check input for cycles nor does it prevent them.
+//It is the file creator's job to make sure the graph is acyclic. If the graph has
+//a cycle the program will crash
 void fileBuildGraph(Graph& graph, ifstream& infile);
 string intToString(int intConvert);
 void printGraph(Graph graph);
 
 int main()
 {
-	Graph graph;
-	int longestPath;
-	bool going = getInput(graph);
-	while (!going)
+	while (true)
 	{
-		going = getInput(graph);
+		Graph graph;
+		int longestPath;
+		bool going = getInput(graph);
+		while (!going)
+		{
+			going = getInput(graph);
+		}
+
+		Timer timer;
+		timer.start();
+		longestPath = graph.getLongestPath();
+		timer.stop();
+
+		cout << endl << "Longest Path in Tree is: " << longestPath << "\nand was found in " << timer() << " seconds" << endl << endl;
+
+		//Debug function
+		//printGraph(graph);
+		//system("pause");
 	}
-
-	Timer timer;
-	timer.start();
-	longestPath = graph.getLongestPath(graph);
-	timer.stop();
-
-	cout << "Longest Path in Tree is: " << longestPath << "\nand was found in " << timer() << " seconds" << endl;
-
-	//Debug function
-	printGraph(graph);
-	system("pause");
 	return 0;
 }
 
@@ -101,10 +110,10 @@ void randBuildGraph(Graph& graph, int size)
 	for (int i = 0; i < size; i++)
 	{
 		Vertex vertex(intToString(i));
-		int numVertices = randInt(0, size - edgeIndex + 1);
+		int numVertices = randInt(1, 100);
 		for (int k = 0; k < numVertices; k++)
 		{
-			if (edgeIndex > i)
+			if (edgeIndex > i && edgeIndex < size)
 				vertex.addEdge(edgeIndex);
 			edgeIndex++;
 		}
@@ -130,8 +139,6 @@ void fileBuildGraph(Graph& graph, ifstream& infile)
 		}
 		graph.addVertex(vertex);
 	}
-
-
 
 }
 
