@@ -1,9 +1,8 @@
 //Wyatt Emery
 //Talon Marquard
 //Graph.h
-//Project 2 Task 3
-//2/24/16
-//Stub Code
+//Project 2 Task 4
+//3/2/16
 
 #include<vector>
 #include<string>
@@ -98,22 +97,9 @@ Graph::Graph()
 }
 
 int Graph::getLongestPath() const
-{
-    int max = 0;
-    int height = 0;
-    
-    //This loop is here mainly to ensure all vertices get checked
-    //without it, some vertices may/will go unchecked and the longest path will not be accurate
-    for (int i = 0; i < _vertices.size(); i++)
-    {
-        int height = getLongestPath(i);
-        if (height > max)
-        {
-            max = height;
-        }
-    }
-    return max;
-	
+{	
+		int height = getLongestPath(0);		
+		return height;
 }
 
 vector<Vertex> Graph::getVertices() const
@@ -146,15 +132,15 @@ void Graph::addEdge(int index1, int index2)
 
 int Graph::getLongestPath(int next) const
 {
-    int max = 0;
-    vector<int> edges = _vertices[next].getEdges();
-	if (edges.empty()) 
+	int max = 0;
+	vector<int> edges = _vertices[next].getEdges();
+	if (edges.empty())
 	{
 		return 1;
 	}
 	else
 	{
-		
+
 		for (int x = 0; x < edges.size(); x++)
 		{
 			int height = getLongestPath(edges[x]);
@@ -163,9 +149,9 @@ int Graph::getLongestPath(int next) const
 				max = height;
 			}
 		}
-		
+
 	}
-    return (max + 1);
+	return (max + 1);
 
 }
 
